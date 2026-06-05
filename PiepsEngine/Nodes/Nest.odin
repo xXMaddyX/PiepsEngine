@@ -3,6 +3,7 @@ package Nodes;
 NestType::enum { 
     Nest, 
     Nest2D,
+    Sprite2D,
 }
 
 NestVTable::struct{
