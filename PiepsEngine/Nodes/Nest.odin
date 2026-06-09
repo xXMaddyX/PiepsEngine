@@ -1,21 +1,42 @@
-package Nodes;
+package CoreEngine;
 
-NestType::enum { 
-    Nest, 
+NestTypes::enum{
+    Nest,
     Nest2D,
     Sprite2D,
 }
 
-NestVTable::struct{
-    ready:                  proc(self: ^Nest),
-    process:                proc(self: ^Nest, delta: i32),
-    physics_process:        proc(self: ^Nest, delta: i32),
+NestTabel::struct{
+    Ready: proc(self: ^Nest),
+    Update: proc(self: ^Nest),
+    Process: proc(self: ^Nest, d: i32),
+    PhysicProcess: proc(self: ^Nest, d: i32),
+    Draw: proc(self: ^Nest),
 }
 
 Nest::struct{
-    node_type:              NestType,
-    Name:                   string,
-    parent:                 ^Nest,
-    children:               [dynamic]^Nest,
-    vtabel:                 ^NestVTable,
+    NestType: NestTypes,
+    Name: string,
+    Is_Ready: bool,
+    Parent: ^Nest,
+    Childs: [dynamic]^Nest,
+    VTabel: ^NestTabel
 }
+
+NestConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Nest {
+    newNest := new(Nest);
+    newNest.Name = name;
+    newNest.Parent = parent;
+    newNest.NestType = nestType;
+    newNest.VTabel = &NEST_VTABEL;
+    return newNest;
+};
+
+NEST_VTABEL := NestTabel{
+    Ready = proc(self: ^Nest) {},
+    Update = proc(self: ^Nest) {},
+    Draw = proc(self: ^Nest) {},
+    Process = proc(self: ^Nest, delta: i32) {},
+    PhysicProcess = proc(self: ^Nest, delta: i32) {},
+    
+};

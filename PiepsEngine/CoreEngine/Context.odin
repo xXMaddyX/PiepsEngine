@@ -1,9 +1,7 @@
 package CoreEngine;
 
 CTX::struct{
-    Window:             ^Window,
-    TextureLoader:      ^TextureLoader,
-    SceneManager:       ^SceneManager,
+    textureLoader: ^TextureLoader
 }
 
-ctx := CTX{}
+ctx := CTX{};
