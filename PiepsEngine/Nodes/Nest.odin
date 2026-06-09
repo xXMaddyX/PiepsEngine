@@ -7,20 +7,20 @@ NestTypes::enum{
 }
 
 NestTabel::struct{
-    Ready: proc(self: ^Nest),
-    Update: proc(self: ^Nest),
-    Process: proc(self: ^Nest, d: i32),
-    PhysicProcess: proc(self: ^Nest, d: i32),
-    Draw: proc(self: ^Nest),
+    Ready:              proc(self: ^Nest),
+    Update:             proc(self: ^Nest),
+    Process:            proc(self: ^Nest, d: i32),
+    PhysicProcess:      proc(self: ^Nest, d: i32),
+    Draw:               proc(self: ^Nest),
 }
 
 Nest::struct{
-    NestType: NestTypes,
-    Name: string,
-    Is_Ready: bool,
-    Parent: ^Nest,
-    Childs: [dynamic]^Nest,
-    VTabel: ^NestTabel
+    NestType:           NestTypes,
+    Name:               string,
+    Is_Ready:           bool,
+    Parent:             ^Nest,
+    Childs:             [dynamic]^Nest,
+    VTabel:             ^NestTabel
 }
 
 NestConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Nest {

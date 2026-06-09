@@ -1,7 +1,7 @@
 package CoreEngine;
 
 CTX::struct{
-    textureLoader: ^TextureLoader,
+    textureLoader:          ^TextureLoader,
     
 }
 

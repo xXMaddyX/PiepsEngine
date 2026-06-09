@@ -1,7 +1,7 @@
 package CoreEngine;
 
 Nest2D::struct{
-    using base: Nest,
+    using base:             Nest,
 
 };
 

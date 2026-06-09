@@ -2,7 +2,7 @@ package CoreEngine;
 import rl "vendor:raylib";
 
 TextureLoaderVTabel::struct{
-    loadTexture: proc(self: ^TextureLoader, path: cstring, name: string),
+    loadTexture:            proc(self: ^TextureLoader, path: cstring, name: string),
 
 }
 
