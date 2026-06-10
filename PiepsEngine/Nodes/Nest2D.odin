@@ -2,15 +2,10 @@ package Nodes;
 import t "../Types"
 import rl "vendor:raylib";
 
-Nest2D::struct{
-    using base:             t.Nest,
-    global_position:        rl.Vector2,
-};
-
-Nest2DConstructor::proc(parent: ^t.Nest, name: string, nestType: t.NestTypes) -> ^Nest2D {
-    newNest2D := new(Nest2D);
+Nest2DConstructor::proc(parent: ^t.Nest, name: string, nestType: t.NestTypes) -> ^t.Nest2D {
+    newNest2D := new(t.Nest2D);
     if Nest2DParentCaster(parent) && parent != nil {
-        parentCast := (^Nest2D)(parent);
+        parentCast := (^t.Nest2D)(parent);
         newNest2D.global_position = parentCast.global_position
         newNest2D.Parent = parent;
     } else { newNest2D.global_position = rl.Vector2{} }
