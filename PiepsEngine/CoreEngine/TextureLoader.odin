@@ -11,10 +11,10 @@ TextureLoader::struct{
     loaderVTabel:           ^TextureLoaderVTabel,
 }
 
-TextureLoader_Init::proc() {
+TextureLoader_Init::proc() -> ^TextureLoader {
     newTextureLoader := new(TextureLoader);
     newTextureLoader.loaderVTabel = &TEXTURE_LOADER_VT;
-    ctx.textureLoader = newTextureLoader;
+    return newTextureLoader;
 };
 
 TEXTURE_LOADER_VT := TextureLoaderVTabel{

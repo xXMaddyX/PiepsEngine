@@ -1,9 +1,11 @@
 package CoreEngine;
+import "core:fmt"
 
 SceneManagerVTabel::struct{
     SetStartScene:          proc(self: ^SceneManager, sceneToStart: string),
     AddScene:               proc(self: ^SceneManager, sceneToAdd: ^Scene),
     Update:                 proc(self: ^SceneManager, delta: f32),
+    PhysicsUpdate:          proc(self: ^SceneManager, delta: f32),
 };
 
 SceneManager::struct{
@@ -12,10 +14,10 @@ SceneManager::struct{
     VTabel:                 ^SceneManagerVTabel,
 };
 
-SceneManager_Init::proc() {
+SceneManager_Init::proc() -> ^SceneManager {
     newSceneManager := new(SceneManager);
     newSceneManager.VTabel = &SCENEMANAGER_VT;
-    ctx.sceneManager = newSceneManager;
+    return newSceneManager;
 };
 
 SCENEMANAGER_VT := SceneManagerVTabel{
@@ -28,5 +30,9 @@ SCENEMANAGER_VT := SceneManagerVTabel{
     Update = proc(self: ^SceneManager, delta: f32) {
         if self.current_scene == nil { return };
         self.current_scene.VTabel.Update(self.current_scene, delta);
+    },
+    PhysicsUpdate = proc(self: ^SceneManager, delta: f32) {
+        if self.current_scene == nil { return };
+        self.current_scene.VTabel.PhysicsUpdate(self.current_scene, delta);
     },
 };

@@ -1,7 +1,9 @@
 package main;
 import PiepsEngine "PiepsEngine"
 import core "PiepsEngine/CoreEngine"
+import ctx "PiepsEngine/Context"
 import nodes "PiepsEngine/Nodes"
+import "core:fmt"
 
 main::proc() {
     PiepsEngine.PiepsEngine_Create();
@@ -11,13 +13,15 @@ main::proc() {
 }
 
 CreateGame::proc() {
-    newScene := new(core.Scene);
-    newScene.VTabel = &core.SCENE_VT;
+    ctx.ctx.textureLoader.loaderVTabel.LoadTexture(ctx.ctx.textureLoader, "./Game/chilli.png", "Chilli");
 
     newRootNode := nodes.NestConstructor(nil, "ROOT", nodes.NestTypes.Nest2D);
     newRootNode.Name = "ROOT";
 
-    newScene.RootNode = newRootNode;
-    core.ctx.sceneManager.VTabel.AddScene(core.ctx.sceneManager, newScene);
-    core.ctx.sceneManager.current_scene = core.ctx.sceneManager.SceneMap["ROOT"];
+    newSprite2D := nodes.Sprite2DConstructor(newRootNode, "Chilli", nodes.NestTypes.Sprite2D, ctx.ctx.textureLoader.Textures["Chilli"]);
+    append(&newRootNode.Childs, (^nodes.Nest)(newSprite2D));
+
+    newScene := core.SceneConstructor("MainScene", newRootNode);
+    ctx.ctx.sceneManager.VTabel.AddScene(ctx.ctx.sceneManager, newScene);
+    ctx.ctx.sceneManager.current_scene = ctx.ctx.sceneManager.SceneMap["MainScene"];
 }

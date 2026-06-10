@@ -14,7 +14,7 @@ Window::struct{
     VTabel:                 ^WindowVTabel,
 }
 
-Window_Init::proc(screenWidth: i32, screenHeight: i32, gameName: cstring, targetFTP: i32) {
+Window_Init::proc(screenWidth: i32, screenHeight: i32, gameName: cstring, targetFTP: i32) -> ^Window {
     w := new(Window);
     w.ScreenWidth = screenWidth;
     w.ScreenHeight = screenHeight;
@@ -22,7 +22,7 @@ Window_Init::proc(screenWidth: i32, screenHeight: i32, gameName: cstring, target
     w.TargetFPS = targetFTP;
     w.Is_Running = true;
     w.VTabel = &WINDOW_VT;
-    ctx.window = w;
+    return w;
 }
 
 WINDOW_VT := WindowVTabel{

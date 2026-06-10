@@ -8,7 +8,6 @@ NestTypes::enum{
 
 NestTabel::struct{
     Ready:              proc(self: ^Nest),
-    Update:             proc(self: ^Nest),
     Process:            proc(self: ^Nest, d: f32),
     PhysicProcess:      proc(self: ^Nest, d: f32),
     Draw:               proc(self: ^Nest),
@@ -20,7 +19,7 @@ Nest::struct{
     Is_Ready:           bool,
     Parent:             ^Nest,
     Childs:             [dynamic]^Nest,
-    VTabel:             ^NestTabel
+    VTabel:             NestTabel
 }
 
 NestConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Nest {
@@ -28,14 +27,25 @@ NestConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Nest
     newNest.Name = name;
     newNest.Parent = parent;
     newNest.NestType = nestType;
-    newNest.VTabel = &NEST_VTABEL;
+    newNest.VTabel = NEST_VTABEL;
     return newNest;
 };
 
 NEST_VTABEL := NestTabel{
     Ready = proc(self: ^Nest) {},
-    Update = proc(self: ^Nest) {},
-    Process = proc(self: ^Nest, delta: f32) {},
-    PhysicProcess = proc(self: ^Nest, delta: f32) {},
-    Draw = proc(self: ^Nest) {},
+    Process = proc(self: ^Nest, delta: f32) {
+        for child in self.Childs {
+            child.VTabel.Process(child, delta);
+        }
+    },
+    PhysicProcess = proc(self: ^Nest, delta: f32) {
+        for child in self.Childs {
+            child.VTabel.PhysicProcess(child, delta);
+        }
+    },
+    Draw = proc(self: ^Nest) {
+        for child in self.Childs {
+            child.VTabel.Draw(child);
+        }
+    },
 };
