@@ -11,6 +11,7 @@ Sprite2D::struct{
     global_position:            rl.Vector2,
     texture:                    ^rl.Texture,
     SpriteVT:                   Sprite2DVTabel,
+    fields:                     rawptr,
 };
 
 Sprite2DConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes, texture: ^rl.Texture) -> ^Sprite2D {
@@ -25,6 +26,9 @@ Sprite2DConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes, text
         parentCast := (^Sprite2D)(parent);
         newSprite2D.global_position = parentCast.global_position;
         newSprite2D.Parent = parent;
+    } else {
+        newSprite2D.global_position.x = 0.0;
+        newSprite2D.global_position.y = 0.0;
     }
     return newSprite2D;
 };

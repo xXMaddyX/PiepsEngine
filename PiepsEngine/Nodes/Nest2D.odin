@@ -12,7 +12,9 @@ Nest2DConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Ne
         parentCast := (^Nest2D)(parent);
         newNest2D.global_position = parentCast.global_position
         newNest2D.Parent = parent;
-    }
+    } else { newNest2D.global_position = rl.Vector2{} }
+    newNest2D.global_position.x = 0.0;
+    newNest2D.global_position.y = 0.0;
     newNest2D.Name = name;
     newNest2D.NestType = nestType;
     newNest2D.VTabel = NEST_VTABEL;
