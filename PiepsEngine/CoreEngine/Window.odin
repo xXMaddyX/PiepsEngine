@@ -25,18 +25,16 @@ Window_Init::proc(screenWidth: i32, screenHeight: i32, gameName: cstring, target
     ctx.window = w;
 }
 
-Window_Start::proc(self: ^Window) {
-    rl.InitWindow(self.ScreenWidth, self.ScreenHeight, self.GameName);
-    if self.ScreenWidth != 0 && self.ScreenHeight != 0 {
-        rl.SetWindowSize(self.ScreenWidth, self.ScreenHeight);
-    } else {
-        self.ScreenWidth = rl.GetMonitorWidth(rl.GetCurrentMonitor()) / 2;
-        self.ScreenHeight = rl.GetMonitorHeight(rl.GetCurrentMonitor()) / 2;
-        rl.SetWindowSize(self.ScreenWidth, self.ScreenHeight);
-    }
-    rl.SetTargetFPS(self.TargetFPS);
-}
-
 WINDOW_VT := WindowVTabel{
-    WindowStart = Window_Start,
+    WindowStart = proc(self: ^Window) {
+        rl.InitWindow(self.ScreenWidth, self.ScreenHeight, self.GameName);
+        if self.ScreenWidth != 0 && self.ScreenHeight != 0 {
+            rl.SetWindowSize(self.ScreenWidth, self.ScreenHeight);
+        } else {
+            self.ScreenWidth = rl.GetMonitorWidth(rl.GetCurrentMonitor()) / 2;
+            self.ScreenHeight = rl.GetMonitorHeight(rl.GetCurrentMonitor()) / 2;
+            rl.SetWindowSize(self.ScreenWidth, self.ScreenHeight);
+        }
+        rl.SetTargetFPS(self.TargetFPS);
+    },
 }

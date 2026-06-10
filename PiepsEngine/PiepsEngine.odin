@@ -7,7 +7,7 @@ import "core:fmt"
 PiepsEngine_Create::proc() {
     cs.SceneManager_Init()
     cs.TextureLoader_Init();
-    fmt.printf("ENGINE: Context Created\n")
+    fmt.printf("PIEPS_ENGINE: Context Created\n")
 };
 
 PiepsEngine_Create_Window::proc(
@@ -18,11 +18,11 @@ PiepsEngine_Create_Window::proc(
 ) {
     cs.Window_Init(screenWidth, screenHeight, gameName, targetFTP);
     cs.ctx.window.VTabel.WindowStart(cs.ctx.window);
-    fmt.printf("ENGINE: Window Created\n")
+    fmt.printf("PIEPS_ENGINE: Window Created\n")
 };
 
 PiepsEngine_Run::proc() {
-    fmt.printf("ENGINE: START\n")
+    fmt.printf("PIEPS_ENGINE: START\n")
     for !rl.WindowShouldClose() {
         dt := rl.GetFrameTime();
         
