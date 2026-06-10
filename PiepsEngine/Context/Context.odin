@@ -1,10 +1,10 @@
 package Context;
-import core "../CoreEngine"
+import t "../Types"
 
 CTX::struct{
-    window:                 ^core.Window,
-    textureLoader:          ^core.TextureLoader,
-    sceneManager:           ^core.SceneManager,
+    window:                 ^t.Window,
+    textureLoader:          ^t.TextureLoader,
+    sceneManager:           ^t.SceneManager,
 }
 
 ctx := CTX{};

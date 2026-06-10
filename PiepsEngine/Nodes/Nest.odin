@@ -1,29 +1,8 @@
 package Nodes;
+import t "../Types"
 
-NestTypes::enum{
-    Nest,
-    Nest2D,
-    Sprite2D,
-}
-
-NestTabel::struct{
-    Ready:              proc(self: ^Nest),
-    Process:            proc(self: ^Nest, d: f32),
-    PhysicProcess:      proc(self: ^Nest, d: f32),
-    Draw:               proc(self: ^Nest),
-}
-
-Nest::struct{
-    NestType:           NestTypes,
-    Name:               string,
-    Is_Ready:           bool,
-    Parent:             ^Nest,
-    Childs:             [dynamic]^Nest,
-    VTabel:             NestTabel
-}
-
-NestConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Nest {
-    newNest := new(Nest);
+NestConstructor::proc(parent: ^t.Nest, name: string, nestType: t.NestTypes) -> ^t.Nest {
+    newNest := new(t.Nest);
     newNest.Name = name;
     newNest.Parent = parent;
     newNest.NestType = nestType;
@@ -31,19 +10,19 @@ NestConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Nest
     return newNest;
 };
 
-NEST_VTABEL := NestTabel{
-    Ready = proc(self: ^Nest) {},
-    Process = proc(self: ^Nest, delta: f32) {
+NEST_VTABEL := t.NestTabel{
+    Ready = proc(self: ^t.Nest) {},
+    Process = proc(self: ^t.Nest, delta: f32) {
         for child in self.Childs {
             child.VTabel.Process(child, delta);
         }
     },
-    PhysicProcess = proc(self: ^Nest, delta: f32) {
+    PhysicProcess = proc(self: ^t.Nest, delta: f32) {
         for child in self.Childs {
             child.VTabel.PhysicProcess(child, delta);
         }
     },
-    Draw = proc(self: ^Nest) {
+    Draw = proc(self: ^t.Nest) {
         for child in self.Childs {
             child.VTabel.Draw(child);
         }

@@ -1,21 +1,10 @@
 package CoreEngine;
+import t "../Types"
 import rl "vendor:raylib";
 
-WindowVTabel::struct{
-    WindowStart: proc(self: ^Window),
-}
 
-Window::struct{
-    ScreenWidth:            i32,
-    ScreenHeight:           i32,
-    TargetFPS:              i32,
-    GameName:               cstring,
-    Is_Running:             bool,
-    VTabel:                 ^WindowVTabel,
-}
-
-Window_Init::proc(screenWidth: i32, screenHeight: i32, gameName: cstring, targetFTP: i32) -> ^Window {
-    w := new(Window);
+Window_Init::proc(screenWidth: i32, screenHeight: i32, gameName: cstring, targetFTP: i32) -> ^t.Window {
+    w := new(t.Window);
     w.ScreenWidth = screenWidth;
     w.ScreenHeight = screenHeight;
     w.GameName = gameName;
@@ -25,8 +14,8 @@ Window_Init::proc(screenWidth: i32, screenHeight: i32, gameName: cstring, target
     return w;
 }
 
-WINDOW_VT := WindowVTabel{
-    WindowStart = proc(self: ^Window) {
+WINDOW_VT := t.WindowVTabel{
+    WindowStart = proc(self: ^t.Window) {
         rl.InitWindow(self.ScreenWidth, self.ScreenHeight, self.GameName);
         if self.ScreenWidth != 0 && self.ScreenHeight != 0 {
             rl.SetWindowSize(self.ScreenWidth, self.ScreenHeight);

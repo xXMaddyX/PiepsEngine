@@ -1,12 +1,13 @@
 package Nodes;
+import t "../Types"
 import rl "vendor:raylib";
 
 Nest2D::struct{
-    using base:             Nest,
+    using base:             t.Nest,
     global_position:        rl.Vector2,
 };
 
-Nest2DConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Nest2D {
+Nest2DConstructor::proc(parent: ^t.Nest, name: string, nestType: t.NestTypes) -> ^Nest2D {
     newNest2D := new(Nest2D);
     if Nest2DParentCaster(parent) && parent != nil {
         parentCast := (^Nest2D)(parent);
@@ -22,7 +23,7 @@ Nest2DConstructor::proc(parent: ^Nest, name: string, nestType: NestTypes) -> ^Ne
 };
 
 
-Nest2DParentCaster::proc(parent: ^Nest) -> bool {
+Nest2DParentCaster::proc(parent: ^t.Nest) -> bool {
     if  parent.NestType == .Nest2D || 
         parent.NestType == .Sprite2D
     { return true };

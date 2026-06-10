@@ -1,5 +1,6 @@
 package main;
 import PiepsEngine "PiepsEngine"
+import t "PiepsEngine/Types"
 import core "PiepsEngine/CoreEngine"
 import ctx "PiepsEngine/Context"
 import nodes "PiepsEngine/Nodes"
@@ -23,16 +24,16 @@ myStates := MyTestFields{
 CreateGame::proc() {
     ctx.ctx.textureLoader.loaderVTabel.LoadTexture(ctx.ctx.textureLoader, "./Game/chilli.png", "Chilli");
 
-    newRootNode := nodes.NestConstructor(nil, "ROOT", nodes.NestTypes.Nest2D);
+    newRootNode := nodes.NestConstructor(nil, "ROOT", t.NestTypes.Nest2D);
     newRootNode.Name = "ROOT";
 
-    newSprite2D := nodes.Sprite2DConstructor(newRootNode, "Chilli", nodes.NestTypes.Sprite2D, ctx.ctx.textureLoader.Textures["Chilli"]);
+    newSprite2D := nodes.Sprite2DConstructor(newRootNode, "Chilli", t.NestTypes.Sprite2D, ctx.ctx.textureLoader.Textures["Chilli"]);
     newSprite2D.fields = &myStates;
     newSprite2D.global_position.y = 200;
-    append(&newRootNode.Childs, (^nodes.Nest)(newSprite2D));
+    append(&newRootNode.Childs, (^t.Nest)(newSprite2D));
 
-    newSprite2D.VTabel.PhysicProcess = proc(self: ^nodes.Nest, delta: f32) {
-        castSprite := (^nodes.Sprite2D)(self);
+    newSprite2D.VTabel.PhysicProcess = proc(self: ^t.Nest, delta: f32) {
+        castSprite := (^t.Sprite2D)(self);
         castFields := (^MyTestFields)(castSprite.fields);
 
         if castSprite.global_position.x  > 600 {
