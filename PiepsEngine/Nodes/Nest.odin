@@ -1,4 +1,4 @@
-package CoreEngine;
+package Nodes;
 
 NestTypes::enum{
     Nest,
@@ -9,8 +9,8 @@ NestTypes::enum{
 NestTabel::struct{
     Ready:              proc(self: ^Nest),
     Update:             proc(self: ^Nest),
-    Process:            proc(self: ^Nest, d: i32),
-    PhysicProcess:      proc(self: ^Nest, d: i32),
+    Process:            proc(self: ^Nest, d: f32),
+    PhysicProcess:      proc(self: ^Nest, d: f32),
     Draw:               proc(self: ^Nest),
 }
 
@@ -36,7 +36,7 @@ NEST_VTABEL := NestTabel{
     Ready = proc(self: ^Nest) {},
     Update = proc(self: ^Nest) {},
     Draw = proc(self: ^Nest) {},
-    Process = proc(self: ^Nest, delta: i32) {},
-    PhysicProcess = proc(self: ^Nest, delta: i32) {},
+    Process = proc(self: ^Nest, delta: f32) {},
+    PhysicProcess = proc(self: ^Nest, delta: f32) {},
     
 };

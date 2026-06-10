@@ -1,4 +1,4 @@
-package CoreEngine;
+package Nodes;
 import rl "vendor:raylib";
 
 
